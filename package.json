@@ -1,0 +1,23 @@
+{
+  "name": "cat-photo-album",
+  "version": "1.0.0",
+  "description": "프로그래머스 고양이 사진첩 어플리케이션 코드 저장소",
+  "main": "index.js",
+  "scripts": {
+    "start": "serve -l 5000",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gywlsp/cat-photo-album.git"
+  },
+  "author": "gywlsp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gywlsp/cat-photo-album/issues"
+  },
+  "homepage": "https://github.com/gywlsp/cat-photo-album#readme",
+  "dependencies": {
+    "serve": "^13.0.2"
+  }
+}
