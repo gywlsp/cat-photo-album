@@ -9,7 +9,7 @@ const cache = {};
 
 export default function App($app) {
   this.state = {
-    isRoot: false,
+    root: false,
     nodes: [],
     path: [],
     selectedFilePath: null,
@@ -28,7 +28,7 @@ export default function App($app) {
         this.setState({
           ...this.state,
           path: [],
-          isRoot: true,
+          root: true,
           nodes: cache.rootNode,
         });
         return;
@@ -58,7 +58,7 @@ export default function App($app) {
             if (cache[node.id]) {
               this.setState({
                 ...this.state,
-                isRoot: false,
+                root: false,
                 path: [...this.state.path, node],
                 nodes: cache[node.id],
                 loading: false,
@@ -68,7 +68,7 @@ export default function App($app) {
             const nextNodes = await getNodeData(node.id);
             this.setState({
               ...this.state,
-              isRoot: false,
+              root: false,
               path: [...this.state.path, node],
               nodes: nextNodes,
               loading: false,
@@ -78,7 +78,7 @@ export default function App($app) {
           case "FILE":
             this.setState({
               ...this.state,
-              isRoot: false,
+              root: false,
               selectedFilePath: node.filePath,
               loading: false,
             });
@@ -92,14 +92,14 @@ export default function App($app) {
         const nextState = { ...this.state };
         nextState.path.pop();
 
-        const isRoot = nextState.path.length === 0;
-        const prevNodeId = isRoot
+        const root = nextState.path.length === 0;
+        const prevNodeId = root
           ? null
           : nextState.path[nextState.path.length - 1].id;
         this.setState({
           ...nextState,
-          isRoot,
-          nodes: isRoot ? cache.rootNode : cache[prevNodeId],
+          root,
+          nodes: root ? cache.rootNode : cache[prevNodeId],
         });
       } catch (e) {
         // 에러처리하기
@@ -127,7 +127,7 @@ export default function App($app) {
     this.state = nextState;
     breadcrumb.setState(this.state.path);
     nodes.setState({
-      isRoot: this.state.isRoot,
+      root: this.state.root,
       nodes: this.state.nodes,
     });
     imageView.setState(this.state.selectedFilePath);
@@ -138,13 +138,13 @@ export default function App($app) {
     try {
       this.setState({
         ...this.state,
-        isRoot: true,
+        root: true,
         loading: true,
       });
       const rootNode = await getNodeData();
       this.setState({
         ...this.state,
-        isRoot: true,
+        root: true,
         nodes: rootNode,
       });
 

@@ -30,7 +30,7 @@ export default function Nodes({ $app, initialState, onClick, onBackClick }) {
         })
         .join("");
 
-      this.$target.innerHTML = !this.state.isRoot
+      this.$target.innerHTML = !this.state.root
         ? `<div class="Node"><img src="./assets/prev.png"></div>${nodesTemplate}`
         : nodesTemplate;
     }
